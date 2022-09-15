@@ -14,16 +14,19 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-
-        $query = AddProduct::query();
-        echo $sorting = $request->sorting;
-        if($request->ajax())
+        $filterdata = $request->post('sorting');
+        if($filterdata != "")
         {
-            $sortingdata = $query->where([['product_tag','=','Sale']])->get();
-            dd( $sortingdata);
-            return response()->json(['sortingdata'=>$sortingdata]);
+            $search_product = AddProduct::where('product_tag','=','Sale')->get();
+            return response()->json(['search_product'=>$search_product]);
         }
-        $all_product =$query->get();
+        else
+        {
+            $all_product = AddProduct::all();
+        }
+
+
+
         $data = compact('all_product');
         return view('product/index')->with($data);
     }

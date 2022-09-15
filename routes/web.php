@@ -52,6 +52,7 @@ Route::group(['prefix'=>'/customer'], function(){
 
     Route::get('product',[ProductController::class,'index']);
     Route::get('product-details/{id}',[ProductController::class,'productdetails']);
+    Route::post('product',[ProductController::class,'index']);
 
     Route::get('sign-in',[LoginRegisterController::class,'index']);
     Route::post('/register',[LoginRegisterController::class, 'store']);

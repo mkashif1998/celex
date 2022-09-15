@@ -45,7 +45,7 @@
                         </div>
                             <div class="shop-select">
                                 {{-- class="shop-sort" --}}
-                                <select class="shop-sort" id="sortingdata" >
+                                <select class="" id="sortingdata" >
                                     <option data-display="Relevance">Relevance</option>
                                     <option value="1">Name, A to Z</a></option>
                                     <option value="2"> Name, Z to A</option>
@@ -70,7 +70,6 @@
                                             class="image">
                                             <img src="{{ asset('images/add-product/' . $product->product_image) }}"
                                                 alt="Product">
-                                            {{-- <img class="hover-image" src="{{url('/')}}/images/product-image/2.jpg" alt="Product"> --}}
                                         </a>
                                         <span class="badges">
                                             @if ($product->product_tag == 'New')
@@ -335,19 +334,17 @@
 <script>
     $(document).ready(function(){
         $('#sortingdata').on('change', function() {
-            var sorting = $(this).val();
+            let sorting = $(this).val();
             alert(sorting);
             $.ajax({
-                type: 'get',
-                dataType: 'html',
-                url:"{{ url('/') }}/customer/product",
-                data:'sorting='+ sorting,
+                url: '/customer/product',
+                type: 'post',
+                dataType: 'json',
+                data: 'sorting='+sorting+ '&_token= {{ csrf_token() }}',
                 success:function(response)
                 {
-                    consol.log(response );
-                    // var sortingdata = data.sortingdata;
-                    // alert(sortingdata);
-            }
+                    consol.log(response.search_product);
+                }
             })
         });
     });
