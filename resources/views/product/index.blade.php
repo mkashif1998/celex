@@ -61,7 +61,7 @@
                 <!-- Shop Bottom Area Start -->
                 <div class="shop-bottom-area">
 
-                    <div class="row">
+                    {{-- <div class="row">
                         @foreach ($all_product as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
                                 <div class="product mb-40px">
@@ -122,6 +122,9 @@
                                 </div>
                             </div>
                         @endforeach
+                    </div> --}}
+                    <div id="bodyData">
+
                     </div>
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center mb-md-30px mb-lm-30px mt-30px" data-aos="fade-up">
@@ -335,7 +338,7 @@
     $(document).ready(function(){
         $('#sortingdata').on('change', function() {
             let sorting = $(this).val();
-            alert(sorting);
+            // alert(sorting);
             $.ajax({
                 url: '/customer/product',
                 type: 'post',
@@ -343,7 +346,13 @@
                 data: 'sorting='+sorting+ '&_token= {{ csrf_token() }}',
                 success:function(response)
                 {
-                    consol.log(response.search_product);
+                    // alert(JSON.stringify(response));
+                    var resultData = response.search_product;
+                    $.each(resultData,function(index,s_product){
+                        // alert(JSON.stringify(s_product.id));
+                        // $("#id").val(s_product.id);
+                    })
+
                 }
             })
         });
