@@ -123,9 +123,6 @@
                             </div>
                         @endforeach
                     </div> --}}
-                    <div id="bodyData">
-
-                    </div>
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center mb-md-30px mb-lm-30px mt-30px" data-aos="fade-up">
                         <ul>
