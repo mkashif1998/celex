@@ -17,8 +17,37 @@ class ProductController extends Controller
         $filterdata = $request->post('sorting');
         if($filterdata != "")
         {
-            $search_product = AddProduct::where('product_tag','=','Sale')->get();
-            return response()->json(['search_product'=>$search_product]);
+            if($filterdata == 0)
+            {
+                $search_product = AddProduct::all();
+                return response()->json(['search_product'=>$search_product]);
+            }
+            if($filterdata == 1)
+            {
+                $search_product = AddProduct::orderBy('product_name')->get();
+                return response()->json(['search_product'=>$search_product]);
+            }
+            else if($filterdata == 2)
+            {
+                $search_product = AddProduct::orderByDesc('product_name')->get();
+                return response()->json(['search_product'=>$search_product]);
+            }
+            else if($filterdata == 3)
+            {
+                $search_product = AddProduct::orderBy('product_price','asc')->get();
+                return response()->json(['search_product'=>$search_product]);
+            }
+            else if($filterdata == 4)
+            {
+                $search_product = AddProduct::orderBy('product_price','desc')->get();
+                return response()->json(['search_product'=>$search_product]);
+            }
+            else
+            {
+                $search_product = AddProduct::all();
+                return response()->json(['search_product'=>$search_product]);
+            }
+
         }
         else
         {

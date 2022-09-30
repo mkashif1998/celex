@@ -46,7 +46,7 @@
                             <div class="shop-select">
                                 {{-- class="shop-sort" --}}
                                 <select class="" id="sortingdata" >
-                                    <option data-display="Relevance">Relevance</option>
+                                    <option value="0">Relevance</option>
                                     <option value="1">Name, A to Z</a></option>
                                     <option value="2"> Name, Z to A</option>
                                     <option value="3"> Price, low to high</option>
@@ -123,6 +123,21 @@
                             </div>
                         @endforeach
                     </div> --}}
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                         <tr>
+                             <th>No</th>
+                             <th>Name</th>
+                             <th>email</th>
+                             <th>Phone</th>
+                             <th>City</th>
+                             <th width="280px">Action</th>
+                         </tr>
+                        </thead>
+                        <tbody id="bodyData">
+
+                        </tbody>
+                     </table>
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center mb-md-30px mb-lm-30px mt-30px" data-aos="fade-up">
                         <ul>
@@ -335,20 +350,33 @@
     $(document).ready(function(){
         $('#sortingdata').on('change', function() {
             let sorting = $(this).val();
-            // alert(sorting);
+            alert(sorting);
             $.ajax({
                 url: '/customer/product',
                 type: 'post',
                 dataType: 'json',
+                cache: false,
                 data: 'sorting='+sorting+ '&_token= {{ csrf_token() }}',
                 success:function(response)
                 {
                     // alert(JSON.stringify(response));
                     var resultData = response.search_product;
-                    $.each(resultData,function(index,s_product){
+                    var bodyData = "";
+                    var i=1;
+                    if(bodyData=="")
+                    {
+                        $.each(resultData,function(index,s_product){
                         // alert(JSON.stringify(s_product.id));
                         // $("#id").val(s_product.id);
-                    })
+                        // $('.cart_item').remove();
+
+                        bodyData+="<tr>"+"<td>"+ i++ +"</td><td>"+s_product.product_name+"</td><td>"+s_product.product_tag+"</td><td>"+s_product.product_tag+"</td>"
+                        +"<td>"+s_product.product_tag+"</td><td><a class='btn btn-primary' href=''>Edit</a>"
+                        +"<button class='btn btn-danger delete' value='"+s_product.id+"' style='margin-left:20px;'>Delete</button></td>"+"</tr>";
+                        
+                        })
+                        $("#bodyData").html(bodyData);
+                    }
 
                 }
             })
