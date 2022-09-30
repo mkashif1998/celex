@@ -164,16 +164,12 @@
                             <h3 class="sidebar-title">Category</h3>
                         </div>
                         <div class="sidebar-widget-category">
-                            <ul>
-                                <li><a href="#" class="selected">All <span>(4)</span> </a></li>
-                                <li><a href="#" class="">Accesssories <span>(3)</span> </a></li>
-                                <li><a href="#" class="">Automation <span>(5)</span> </a></li>
-                                <li><a href="#" class="">Boxes <span>(2)</span> </a></li>
-                                <li><a href="#" class="">Sensore <span>(6)</span> </a></li>
-                                <li><a href="#" class="">Fittings <span>(4)</span> </a></li>
-                                <li><a href="#" class="">Ballasts <span>(1)</span> </a></li>
-                                <li><a href="#" class="">Fan <span>(3)</span> </a></li>
-                                <li><a href="#" class="">Cable <span>(4)</span> </a></li>
+                            <ul id="mylist">
+                                <li><a href="javascript:void(0);" id="" class="selected">All <span>(4)</span> </a></li>
+                                <li><a href="javascript:void(0);" class="">Accesssories <span>(3)</span> </a></li>
+                                <li><a href="javascript:void(0);" class="">Automation <span>(5)</span> </a></li>
+                                <li><a href="javascript:void(0);" class="">Boxes <span>(2)</span> </a></li>
+                                <li><a href="javascript:void(0);" class="">Sensore <span>(6)</span> </a></li>
                             </ul>
                         </div>
                     </div>
@@ -348,15 +344,26 @@
 @section('script')
 <script>
     $(document).ready(function(){
+        var a = document.getElementById('mylist').getElementsByTagName('li');
+        var productcategory = "";
+        for(var i = 0; i < a.length; i++){
+            a[i].onclick = function(){
+                    // alert(this.innerText);
+                    productcategory = this.innerText;
+            }
+        }
         $('#sortingdata').on('change', function() {
             let sorting = $(this).val();
-            alert(sorting);
+            alert(productcategory);
+
+
+
             $.ajax({
                 url: '/customer/product',
                 type: 'post',
                 dataType: 'json',
                 cache: false,
-                data: 'sorting='+sorting+ '&_token= {{ csrf_token() }}',
+                data: 'sorting='+sorting+ ' category='+productcategory+ ' &_token= {{ csrf_token() }}',
                 success:function(response)
                 {
                     // alert(JSON.stringify(response));
@@ -373,7 +380,7 @@
                         bodyData+="<tr>"+"<td>"+ i++ +"</td><td>"+s_product.product_name+"</td><td>"+s_product.product_tag+"</td><td>"+s_product.product_tag+"</td>"
                         +"<td>"+s_product.product_tag+"</td><td><a class='btn btn-primary' href=''>Edit</a>"
                         +"<button class='btn btn-danger delete' value='"+s_product.id+"' style='margin-left:20px;'>Delete</button></td>"+"</tr>";
-                        
+
                         })
                         $("#bodyData").html(bodyData);
                     }
