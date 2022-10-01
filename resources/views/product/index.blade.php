@@ -60,7 +60,68 @@
 
                 <!-- Shop Bottom Area Start -->
                 <div class="shop-bottom-area">
+                    {{-- <div class="row" >
+                        @foreach ($all_product as $product)
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
+                                <div class="product mb-40px">
+                                    <div class="thumb">
+                                        <a href="{{ url('/') }}/customer/product-details/{{ $product->id }}"
+                                            class="image">
+                                            <img src="{{ asset('images/add-product/' . $product->product_image) }}"
+                                                alt="Product">
+                                        </a>
+                                        <span class="badges">
+                                            @if ($product->product_tag == 'New')
+                                                <span class="new">{{ $product->product_tag }}</span>
+                                            @elseif ($product->product_tag == 'Sale')
+                                                <span class="sale">{{ $product->product_price_off . '%' }}</span>
+                                            @elseif ($product->product_tag == 'Both')
+                                                <span class="new">New</span>
+                                                <span class="sale">{{ $product->product_price_off . '%' }}</span>
+                                            @else
+                                                <span class=""></span>
+                                            @endif
+                                        </span>
+                                        <div class="actions">
+                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
+                                                    class="fa fa-heart-o"></i></a>
+                                            <a href="#" class="action quickview" data-link-action="quickview"
+                                                title="Quick view" data-bs-toggle="modal" data-bs-target="#show_product_modal"><i
+                                                    class="fa fa-search"></i></a>
+                                            <a href="compare.html" class="action compare" title="Compare"><i
+                                                    class="fa fa-refresh"></i></a>
+                                        </div>
+                                        <button title="Add To Cart" class=" add-to-cart">Add
+                                            To Cart</button>
+                                    </div>
+                                    <div class="content">
+                                        <h5 class="title"><a title="New Affordable Fire TV"
+                                                href="{{ url('/') }}/customer/product-details/{{ $product->id }}">{{ $product->product_name }}</a>
+                                        </h5>
+                                        <span class="price">
+                                            <?php
+                                            $price_off = $product->product_price_off;
+                                            if ($price_off != '') {
+                                                $price = $product->product_price;
+                                                $persent_price = ($price_off * $price) / 100;
+                                                $new_price = $price - $persent_price;
+                                            } else {
+                                                $price_off = 0;
+                                            }
+                                            ?>
+                                            @if ($price_off == 0)
+                                                <span class="new">{{ '$' . $product->product_price }}</span>
+                                            @else
+                                                <span class="new">{{ '$' . $new_price }}</span>
+                                                <span class="old">{{ '$' . $product->product_price }}</span>
+                                            @endif
 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div> --}}
                     <div class="row" id="bodyData">
                         {{-- @foreach ($all_product as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
@@ -122,23 +183,7 @@
                                 </div>
                             </div>
                         @endforeach --}}
-
                     </div>
-                    <table class="table table-bordered table-sm">
-                        <thead>
-                         <tr>
-                             <th>No</th>
-                             <th>Name</th>
-                             <th>email</th>
-                             <th>Phone</th>
-                             <th>City</th>
-                             <th width="280px">Action</th>
-                         </tr>
-                        </thead>
-                        <tbody >
-
-                        </tbody>
-                     </table>
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center mb-md-30px mb-lm-30px mt-30px" data-aos="fade-up">
                         <ul>
@@ -382,12 +427,12 @@
                         // +"<td>"+s_product.product_tag+"</td><td><a class='btn btn-primary' href=''>Edit</a>"
                         // +"<button class='btn btn-danger delete' value='"+s_product.id+"' style='margin-left:20px;'>Delete</button></td>"+"</tr>";
                         bodyData+=`
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200" style="border:1px solid red">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200" >
                                 <div class="product mb-40px">
                                     <div class="thumb">
                                         <a href="#"
                                             class="image">
-                                            <img src=""
+                                            <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGVuc3xlbnwwfHwwfHw%3D&w=1000&q=80"
                                                 alt="Product">
                                         </a>
                                         <span class="badges">
