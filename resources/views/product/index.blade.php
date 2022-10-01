@@ -61,8 +61,8 @@
                 <!-- Shop Bottom Area Start -->
                 <div class="shop-bottom-area">
 
-                    {{-- <div class="row">
-                        @foreach ($all_product as $product)
+                    <div class="row" id="bodyData">
+                        {{-- @foreach ($all_product as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
                                 <div class="product mb-40px">
                                     <div class="thumb">
@@ -121,8 +121,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div> --}}
+                        @endforeach --}}
+
+                    </div>
                     <table class="table table-bordered table-sm">
                         <thead>
                          <tr>
@@ -134,7 +135,7 @@
                              <th width="280px">Action</th>
                          </tr>
                         </thead>
-                        <tbody id="bodyData">
+                        <tbody >
 
                         </tbody>
                      </table>
@@ -377,10 +378,45 @@
                         // $("#id").val(s_product.id);
                         // $('.cart_item').remove();
 
-                        bodyData+="<tr>"+"<td>"+ i++ +"</td><td>"+s_product.product_name+"</td><td>"+s_product.product_tag+"</td><td>"+s_product.product_tag+"</td>"
-                        +"<td>"+s_product.product_tag+"</td><td><a class='btn btn-primary' href=''>Edit</a>"
-                        +"<button class='btn btn-danger delete' value='"+s_product.id+"' style='margin-left:20px;'>Delete</button></td>"+"</tr>";
+                        // bodyData+="<tr>"+"<td>"+ i++ +"</td><td>"+s_product.product_name+"</td><td>"+s_product.product_tag+"</td><td>"+s_product.product_tag+"</td>"
+                        // +"<td>"+s_product.product_tag+"</td><td><a class='btn btn-primary' href=''>Edit</a>"
+                        // +"<button class='btn btn-danger delete' value='"+s_product.id+"' style='margin-left:20px;'>Delete</button></td>"+"</tr>";
+                        bodyData+=`
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200" style="border:1px solid red">
+                                <div class="product mb-40px">
+                                    <div class="thumb">
+                                        <a href="#"
+                                            class="image">
+                                            <img src=""
+                                                alt="Product">
+                                        </a>
+                                        <span class="badges">
+                                                <span class="new">New</span>
+                                        </span>
+                                        <div class="actions">
+                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
+                                                    class="fa fa-heart-o"></i></a>
+                                            <a href="#" class="action quickview" data-link-action="quickview"
+                                                title="Quick view" data-bs-toggle="modal" data-bs-target="#show_product_modal"><i
+                                                    class="fa fa-search"></i></a>
+                                            <a href="compare.html" class="action compare" title="Compare"><i
+                                                    class="fa fa-refresh"></i></a>
+                                        </div>
+                                        <button title="Add To Cart" class=" add-to-cart">Add
+                                            To Cart</button>
+                                    </div>
+                                    <div class="content">
+                                        <h5 class="title"><a title="New Affordable Fire TV"
+                                                href="#">s_product.product_name</a>
+                                        </h5>
+                                        <span class="price">
+                                            <span class="new">price</span>
 
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
                         })
                         $("#bodyData").html(bodyData);
                     }
