@@ -31,7 +31,7 @@
 <div class="shop-category-area pb-100px pt-70px">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 order-lg-last col-md-12 order-md-first">
+            <div class="col-lg-12 order-lg-last col-md-12 order-md-first">
                 <!-- Shop Top Area Start -->
                 <div class="shop-top-bar d-flex">
                     <!-- Left Side start -->
@@ -60,7 +60,7 @@
                 <div class="shop-bottom-area">
                     <div class="row product_bydefault">
                         @foreach ($all_product as $product)
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
                                 <div class="product mb-40px">
                                     <div class="thumb">
                                         <a href="{{ url('/') }}/customer/product-details/{{ $product->id }}"
@@ -121,66 +121,6 @@
                         @endforeach
                     </div>
                     <div class="row" id="bodyData">
-                        {{-- @foreach ($all_product as $product)
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
-                                <div class="product mb-40px">
-                                    <div class="thumb">
-                                        <a href="{{ url('/') }}/customer/product-details/{{ $product->id }}"
-                                            class="image">
-                                            <img src="{{ asset('images/add-product/' . $product->product_image) }}"
-                                                alt="Product">
-                                        </a>
-                                        <span class="badges">
-                                            @if ($product->product_tag == 'New')
-                                                <span class="new">{{ $product->product_tag }}</span>
-                                            @elseif ($product->product_tag == 'Sale')
-                                                <span class="sale">{{ $product->product_price_off . '%' }}</span>
-                                            @elseif ($product->product_tag == 'Both')
-                                                <span class="new">New</span>
-                                                <span class="sale">{{ $product->product_price_off . '%' }}</span>
-                                            @else
-                                                <span class=""></span>
-                                            @endif
-                                        </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="fa fa-heart-o"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                                title="Quick view" data-bs-toggle="modal" data-bs-target="#show_product_modal"><i
-                                                    class="fa fa-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="fa fa-refresh"></i></a>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                        <h5 class="title"><a title="New Affordable Fire TV"
-                                                href="{{ url('/') }}/customer/product-details/{{ $product->id }}">{{ $product->product_name }}</a>
-                                        </h5>
-                                        <span class="price">
-                                            <?php
-                                            $price_off = $product->product_price_off;
-                                            if ($price_off != '') {
-                                                $price = $product->product_price;
-                                                $persent_price = ($price_off * $price) / 100;
-                                                $new_price = $price - $persent_price;
-                                            } else {
-                                                $price_off = 0;
-                                            }
-                                            ?>
-                                            @if ($price_off == 0)
-                                                <span class="new">{{ '$' . $product->product_price }}</span>
-                                            @else
-                                                <span class="new">{{ '$' . $new_price }}</span>
-                                                <span class="old">{{ '$' . $product->product_price }}</span>
-                                            @endif
-
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach --}}
                     </div>
                     <!--  Pagination Area Start -->
                     <div class="pro-pagination-style text-center mb-md-30px mb-lm-30px mt-30px" data-aos="fade-up">
@@ -200,7 +140,7 @@
                 <!-- Shop Bottom Area End -->
             </div>
             <!-- Sidebar Area Start -->
-            <div class="col-lg-3 order-lg-first col-md-12 order-md-last mb-md-60px mb-lm-60px">
+            <div class="col-lg-3 order-lg-first col-md-12 order-md-last mb-md-60px mb-lm-60px" style="display: none">
                 <div class="shop-sidebar-wrap">
                     <!-- Sidebar single item -->
                     <div class="sidebar-widget">
@@ -444,9 +384,8 @@
                         {
                             producttag = `<span class=""></span>`;
                         }
-                         if(s_product.product_price_off!= 0)
+                        if(s_product.product_price_off!= 0)
                         {
-
                             let price = s_product.product_price;
                             let persent_price = (s_product.product_price_off * price) / 100;
                             let new_price = price - persent_price;
@@ -457,7 +396,7 @@
                             produtprice = `<span class="new">$${s_product.product_price}</span>`;
                         }
                         bodyData+=`
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200" >
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200" >
                                 <div class="product mb-40px">
                                     <div class="thumb">
                                         <a href="product-details/+${s_product.id}"
