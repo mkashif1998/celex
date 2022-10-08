@@ -25,7 +25,6 @@
         </div>
     </div>
 </div>
-
 <!-- breadcrumb-area end -->
 
 <!-- Shop Category pages -->
@@ -36,15 +35,14 @@
                 <!-- Shop Top Area Start -->
                 <div class="shop-top-bar d-flex">
                     <!-- Left Side start -->
-                    <p>There Are 17 Products.</p>
+                    <p>There Are {{ $total_product }} Products.</p>
                     <!-- Left Side End -->
                     <!-- Right Side Start -->
                     <div class="select-shoing-wrap d-flex align-items-center">
                         <div class="shot-product">
                             <p>Sort By:</p>
                         </div>
-                            <div class="shop-select">
-                                {{-- class="shop-sort" --}}
+                            <div class="shop-select ">
                                 <select class="" id="sortingdata" >
                                     <option value="0">Relevance</option>
                                     <option value="1">Name, A to Z</a></option>
@@ -60,7 +58,7 @@
 
                 <!-- Shop Bottom Area Start -->
                 <div class="shop-bottom-area">
-                    {{-- <div class="row" >
+                    <div class="row product_bydefault">
                         @foreach ($all_product as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
                                 <div class="product mb-40px">
@@ -121,7 +119,7 @@
                                 </div>
                             </div>
                         @endforeach
-                    </div> --}}
+                    </div>
                     <div class="row" id="bodyData">
                         {{-- @foreach ($all_product as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200">
@@ -400,7 +398,7 @@
         }
         $('#sortingdata').on('change', function() {
             let sorting = $(this).val();
-            alert(productcategory);
+            // alert(productcategory);
 
 
 
@@ -411,11 +409,15 @@
                 cache: false,
                 data: 'sorting='+sorting+ ' category='+productcategory+ ' &_token= {{ csrf_token() }}',
                 success:function(response)
-                {
+                {   $(".product_bydefault").hide();
                     // alert(JSON.stringify(response));
                     var resultData = response.search_product;
                     var bodyData = "";
                     var i=1;
+                    var producttag = "";
+                    var produtprice = "";
+
+
                     if(bodyData=="")
                     {
                         $.each(resultData,function(index,s_product){
@@ -426,18 +428,47 @@
                         // bodyData+="<tr>"+"<td>"+ i++ +"</td><td>"+s_product.product_name+"</td><td>"+s_product.product_tag+"</td><td>"+s_product.product_tag+"</td>"
                         // +"<td>"+s_product.product_tag+"</td><td><a class='btn btn-primary' href=''>Edit</a>"
                         // +"<button class='btn btn-danger delete' value='"+s_product.id+"' style='margin-left:20px;'>Delete</button></td>"+"</tr>";
+                        if(s_product.product_tag== 'New')
+                        {
+                            producttag = `<span class="new">New</span>`;
+                        }
+                         if(s_product.product_tag== 'Sale')
+                        {
+                            producttag = `<span class="sale">${s_product.product_price_off}%</span>`;
+                        }
+                         if(s_product.product_tag== 'Both')
+                        {
+                            producttag = `<span class="new">New</span><span class="sale">${s_product.product_price_off}%</span>`;
+                        }
+                         if(s_product.product_tag== 'None')
+                        {
+                            producttag = `<span class=""></span>`;
+                        }
+                         if(s_product.product_price_off!= 0)
+                        {
+
+                            let price = s_product.product_price;
+                            let persent_price = (s_product.product_price_off * price) / 100;
+                            let new_price = price - persent_price;
+                            produtprice = `<span class="new">$${new_price}</span><span class="old">$${price}</span>`;
+                        }
+                        if(s_product.product_price_off== 0)
+                        {
+                            produtprice = `<span class="new">$${s_product.product_price}</span>`;
+                        }
                         bodyData+=`
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" data-aos="fade-up" data-aos-delay="200" >
                                 <div class="product mb-40px">
                                     <div class="thumb">
-                                        <a href="#"
+                                        <a href="product-details/+${s_product.id}"
                                             class="image">
-                                            <img src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGVuc3xlbnwwfHwwfHw%3D&w=1000&q=80"
+                                            <img src="../images/add-product/${s_product.product_image}"
                                                 alt="Product">
                                         </a>
                                         <span class="badges">
-                                                <span class="new">New</span>
+                                            ${producttag}
                                         </span>
+
                                         <div class="actions">
                                             <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
                                                     class="fa fa-heart-o"></i></a>
@@ -452,11 +483,10 @@
                                     </div>
                                     <div class="content">
                                         <h5 class="title"><a title="New Affordable Fire TV"
-                                                href="#">s_product.product_name</a>
+                                                href="product-details/+${s_product.id}">${s_product.product_name}</a>
                                         </h5>
                                         <span class="price">
-                                            <span class="new">price</span>
-
+                                            ${produtprice}
                                         </span>
                                     </div>
                                 </div>

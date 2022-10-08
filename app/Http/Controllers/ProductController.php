@@ -52,11 +52,12 @@ class ProductController extends Controller
         else
         {
             $all_product = AddProduct::all();
+            $total_product = AddProduct::count();
         }
 
 
 
-        $data = compact('all_product');
+        $data = compact('all_product','total_product');
         return view('product/index')->with($data);
     }
     public function productdetails(Request $request, AddProduct $addProduct, $id)
