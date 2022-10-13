@@ -8198,3 +8198,50 @@ body.offcanvas-open {
     background: #fff;
     padding: 20px;
 }
+  /*===================================
+      - Slider Image upload design
+  =================================*/
+#slider_picture__input {
+    display: none;
+  }
+
+  .slider_picture {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    border: 2px dashed currentcolor;
+    cursor: pointer;
+    font-family: sans-serif;
+    transition: color 300ms ease-in-out, background 300ms ease-in-out;
+    outline: none;
+    overflow: hidden;
+    height: 200px;
+  }
+
+  .slider_picture:hover {
+    color: #777;
+    background: #ccc;
+  }
+
+  .slider_picture:active {
+    border-color: #F1AC06;
+    color: #F1AC06;
+    background: #eee;
+  }
+
+  .slider_picture:focus {
+    color: #777;
+    background: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .slider_picture__img {
+    max-width: 100%;
+  }
+  /*===================================
+      - Slider Image upload design
+  =================================*/

@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AddProductController;
+use App\Http\Controllers\SliderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,9 @@ Route::group(['prefix'=>'/admin'], function(){
     Route::get('product-delete/{id}',[AddProductController::class, 'destroy']);
     Route::get('product-edit/{id}',[AddProductController::class, 'edit']);
     Route::post('product-update/{id}',[AddProductController::class, 'update']);
+
+    Route::get('slider',[SliderController::class, 'index']);
+    Route::post('slider-data-save',[SliderController::class, 'store']);
 
 });
 
