@@ -73,6 +73,7 @@ Route::group(['prefix'=>'/admin'], function(){
 
     Route::get('slider',[SliderController::class, 'index']);
     Route::post('slider-data-save',[SliderController::class, 'store']);
+    Route::get('slider-delete/{id}',[SliderController::class, 'softdelete']);
 
 });
 

@@ -8219,7 +8219,7 @@ body.offcanvas-open {
     transition: color 300ms ease-in-out, background 300ms ease-in-out;
     outline: none;
     overflow: hidden;
-    height: 200px;
+    height: 230px;
   }
 
   .slider_picture:hover {
@@ -8242,6 +8242,48 @@ body.offcanvas-open {
   .slider_picture__img {
     max-width: 100%;
   }
+
   /*===================================
       - Slider Image upload design
   =================================*/
+  .cursor
+  {
+    cursor: pointer;
+  }
+  .card-border
+  {
+    background-color: #FFB300;
+  }
+  .card-border:hover
+  {
+        background-color: #212121;
+  }
+
+
+
+  .paginate_button {
+    border-radius: 0 !important;
+  }
+  .dataTables_filter input
+  {
+    border:1px solid gray;
+    border-radius: 5px;
+  }
+  .dataTables_filter input:focus {
+    outline: none;
+  }
+
+  #tabeljs
+  {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+  }
+  #tabeljs.dataTable thead th, table.dataTable thead td
+  {
+    border-bottom: 1px solid lightgray;
+  }
+  .dataTables_filter input
+  {
+      height: 30px;
+      margin-bottom: 20px;
+  }

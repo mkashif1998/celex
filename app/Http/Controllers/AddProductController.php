@@ -107,12 +107,12 @@ class AddProductController extends Controller
 
         if($searchkey!="")
         {
-            $displayproduct = AddProduct::where('product_name','LIKE',"%$searchkey%")->paginate(5);
+            $displayproduct = AddProduct::where('product_name','LIKE',"%$searchkey%")->get();
 
         }
         else
         {
-            $displayproduct = AddProduct::paginate(5);
+            $displayproduct = AddProduct::all();
         }
 
         $data = compact('displayproduct','searchkey');

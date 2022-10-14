@@ -2,10 +2,27 @@
 @push('Title')
     <title>Products</title>
 @endpush
+@section('CSSStyle')
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.css'>
+<link rel='stylesheet' href='https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css'>
 <style>
-
+@media only screen and (max-width: 2600px) and (min-width: 1200px)  {
+    .display
+    {
+        max-width: 1130px !important;
+    }
+}
+@media only screen and (max-width: 1200px) and (min-width: 990px)  {
+    .display
+    {
+        max-width: 730px !important;
+    }
+}
 </style>
-@section('product-search')
+@endsection
+
+{{-- @section('product-search')
 <div class="col d-none d-lg-block">
     <div class="dropdown_search">
         <form class="action-form" action="#">
@@ -14,32 +31,35 @@
         </form>
     </div>
 </div>
-@endsection
+@endsection --}}
 @section('main-section')
     <div class="container">
-        <a href="{{url('/')}}/admin/add-product" class="btn btn-color-dark btn-hover-color-primary float-right mb-3" type="button">Add New Product</a>
-        <table class="table">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Id</th>
-                {{-- <th scope="col">Image</th> --}}
-                <th scope="col">Product Name</th>
-                <th scope="col">Product Category</th>
-                <th scope="col">Product Tag</th>
-                <th scope="col">Product Type</th>
-                <th scope="col">Product Stock</th>
-                <th scope="col">Product Price</th>
-                <th scope="col">Product Price Off %</th>
-                <th scope="col">Product Other Info</th>
-                <th scope="col">Product Description</th>
-                <th scope="col">Action</th>
-              </tr>
+        <div class="d-flex justify-content-end" >
+            <a href="{{url('/')}}/admin/add-product" class="btn btn-color-dark btn-hover-color-primary  mb-3" type="button">Add New Product</a>
+        </div>
+        <div style="border:px solid red">
+          <table id="tabeljs" class="display" style="">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Product Category</th>
+                    <th scope="col">Product Tag</th>
+                    <th scope="col">Product Type</th>
+                    <th scope="col">Product Stock</th>
+                    <th scope="col">Product Price</th>
+                    <th scope="col">Product Price Off %</th>
+                    <th scope="col">Product Other Info</th>
+                    <th scope="col">Product Description</th>
+                    <th scope="col">Action</th>
+                </tr>
             </thead>
             <tbody>
                 @foreach ($displayproduct as $product)
                 <tr >
                     <th scope="row">{{$product->id}}</th>
-                    {{-- <td><img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" width="100px" height="100px"/></td> --}}
+                    <th >{{$product->id}}</th>
                     <td>{{$product->product_name}}</td>
                     <td>{{$product->product_category}}</td>
                     <td>{{$product->product_tag}}</td>
@@ -64,11 +84,29 @@
                   </tr>
                 @endforeach
             </tbody>
-          </table>
-          {{$displayproduct->links()}}
+        </table>
+        </div>
     </div>
 @endsection
 
 @section('script')
-
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src='https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js'></script>
+<script>
+    $(document).ready(function() {
+        var table = $('#tabeljs').DataTable({
+                select: false,
+                "columnDefs": [{
+                    className: "Name",
+                    "targets":[0],
+                    "visible": false,
+                    "searchable":false
+                }]
+            });
+        $('#tabeljs tbody').on( 'click', 'tr', function () {
+            // alert(table.row( this ).data()[0]);
+        } );
+    });
+</script>
 @endsection

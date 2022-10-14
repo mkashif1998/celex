@@ -112,6 +112,8 @@
                                         class="fa fa-cog"></i></button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a class="dropdown-item" href="{{url('/')}}/customer/my-account">My account</a></li>
+                                    <li><a class="dropdown-item" href="{{url('/')}}/admin/products-view">Product Setting</a></li>
+                                    <li><a class="dropdown-item" href="{{url('/')}}/admin/slider">Slider Setting</a></li>
                                     <li><a class="dropdown-item" href="{{url('/')}}/customer/checkout">Checkout</a></li>
                                     <li><a class="dropdown-item" href="{{url('/')}}/customer/cart">Cart</a></li>
                                     <li><a class="dropdown-item" href="{{url('/')}}/customer/sign-in">Sign in</a></li>

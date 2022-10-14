@@ -20,23 +20,25 @@
             <!-- Hero slider Active -->
             <div class="swiper-wrapper">
                 <!-- Single slider item -->
-                <div class="hero-slide-item slider-height swiper-slide d-flex"
-                    data-bg-image="{{ url('/') }}/images/slider-image/bg-1.jpg">
-                    <div class="container align-self-center">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-7 col-md-7 col-sm-7 align-self-center">
-                                <div class="hero-slide-content slider-animated-1">
-                                    <h2 class="title-1">Bracket Holder <br> & Camera Stand </h2>
-                                    <p>Avail 15% off on Making Charges for all Items</p>
-                                    <a href="shop-left-sidebar.html" class="btn btn-lg btn-primary btn-hover-dark mt-4">Shop
-                                        Now</a>
+                @foreach ($slider_data as $slider_details)
+                    <div class="hero-slide-item slider-height swiper-slide d-flex" data-bg-image="{{ url('/') }}/images/slider/{{ $slider_details->slider_image }}">
+                        <div class="container align-self-center">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-7 col-md-7 col-sm-7 align-self-center">
+                                    <div class="hero-slide-content slider-animated-1">
+                                        <h2 class="title-1">{{ $slider_details->slider_title }} </h2>
+                                        <p>{{ $slider_details->slider_text }}</p>
+                                        <a href="shop-left-sidebar.html" class="btn btn-lg btn-primary btn-hover-dark mt-4">Shop
+                                            Now</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
+
                 <!-- Single slider item -->
-                <div class="hero-slide-item slider-height swiper-slide d-flex"
+                {{-- <div class="hero-slide-item slider-height swiper-slide d-flex"
                     data-bg-image="{{ url('/') }}/images/slider-image/bg-2.jpg">
                     <div class="container align-self-center">
                         <div class="row">
@@ -50,7 +52,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination swiper-pagination-white"></div>

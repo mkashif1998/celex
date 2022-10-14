@@ -598,3 +598,14 @@
 
 
 })(jQuery);
+
+
+/*-----------------------------
+        Success/Fail Alert Timer
+    -------------------------------- */
+    $(function() {
+        setTimeout(function() { $(".alert-success").fadeOut(1500); }, 1000)
+    })
+    $(function() {
+        setTimeout(function() { $(".alert-fail").fadeOut(1500); }, 1000)
+    })

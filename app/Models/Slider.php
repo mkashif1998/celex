@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Slider extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 }

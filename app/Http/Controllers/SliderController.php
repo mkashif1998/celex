@@ -14,7 +14,10 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return view('slider.index');
+        $slider_view = Slider::all();
+        $data = compact('slider_view');
+
+        return view('slider.index')->with($data);
     }
 
     /**
@@ -38,10 +41,35 @@ class SliderController extends Controller
         $request->validate([
             'slider_title' => 'required',
             'slider_text' => 'required',
-            'slider_picture' => 'required|image'
+            'slider_picture' => 'required'
         ]);
-        echo '<pre>';
-        print_r($request->all());
+        $file= null;
+        if(request()->hasFile('slider_picture'))
+        {
+            // $file = $request->file('product_image')->store('product');
+            $file = $request->file('slider_picture');
+            $filename=time().'.'.$file->getClientOriginalExtension();
+            $file->move('images/slider', $filename);
+        }
+        // dd($file);
+        // echo '<pre>';
+        // print_r($request->all());
+
+        $slider_data = new Slider;
+        $slider_data->slider_title = $request['slider_title'];
+        $slider_data->slider_text = $request['slider_text'];
+        $slider_data->slider_image = $filename;
+
+        $save_data = $slider_data->save();
+        if($save_data)
+        {
+            return back()->with('slideradd','Slider Add Successfully');
+        }
+        else
+        {
+            return back()->with('sliderfail','Opps Something is wrong');
+
+        }
 
     }
 
@@ -85,6 +113,21 @@ class SliderController extends Controller
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
+    public function softdelete(Slider $slider, $id)
+    {
+        $slide_delete = Slider::find($id);
+
+        if(!is_null($slide_delete))
+        {
+            $slide_delete->delete();
+            return back();
+        }
+        else
+        {
+
+        }
+    }
+
     public function destroy(Slider $slider)
     {
         //
