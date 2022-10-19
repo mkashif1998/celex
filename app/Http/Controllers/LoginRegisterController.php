@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoginRegister;
+use App\Models\AdminLogin;
 use Illuminate\Http\Request;
 use Hash;
 class LoginRegisterController extends Controller
@@ -35,6 +36,8 @@ class LoginRegisterController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $request->validate([
             'user_name'=> 'required',
             'user_email'=> 'required|email|unique:login_registers',
@@ -57,6 +60,19 @@ class LoginRegisterController extends Controller
             return back()->with('Failreg','You have fail to registered');
         }
 
+        // $username = 'Ali Raza';
+        // $useremail = 'kas123@gmail.com';
+        // $userpassword = 'Pa$$w0rd!';
+        // $userdesigin = 'CEO';
+        // $useractive = 'Active';
+        // $register_user = new AdminLogin;
+        // $register_user->admin_name	 = $username;
+        // $register_user->admin_email	 = $useremail;
+        // $register_user->admin_password = Hash::make($userpassword);
+        // $register_user->admin_designation = $userdesigin;
+        // $register_user->admin_status = $useractive;
+        // $user = $register_user->save();
+        // return back()->with('Successreg','You have successfully registered');
         // echo '<pre>';
         // print_r($request->all());
     }
@@ -69,11 +85,25 @@ class LoginRegisterController extends Controller
 
         $user_login = LoginRegister::where('user_email','=',$request->login_email)->first();
 
+        $admin_login = AdminLogin::where('admin_email','=',$request->login_email)->first();
+
         if($user_login)
         {
             if(Hash::check($request->login_password, $user_login->user_password))
             {
                 $request->session()->put('login_id',$user_login->id);
+                return redirect('/');
+            }
+            else
+            {
+                return back()->with('Failpass','Password is not correct');
+            }
+        }
+        else if( $admin_login)
+        {
+            if(Hash::check($request->login_password, $admin_login->admin_password))
+            {
+                $request->session()->put('admin_id',$admin_login->id);
                 return redirect('/');
             }
             else

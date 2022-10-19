@@ -78,5 +78,7 @@ Route::group(['prefix'=>'/admin'], function(){
 });
 
 
+// ---------------Testing route-------------------------//
 
 Route::get('/test',[CartController::class,'test']);
+Route::get('/session',[HomeController::class,'test']);

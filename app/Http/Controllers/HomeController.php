@@ -138,4 +138,27 @@ class HomeController extends Controller
     {
 
     }
+
+
+
+
+
+    public function test(Request $request)
+    {
+
+        $singledata = $request->session()->get('login_id');
+
+        $singledata = $request->session()->put('key','value');
+
+        $singledata = $request->session()->flash('key','value');
+
+        $session_data = $request->session()->all();
+
+        echo '<pre>';
+        print_r($session_data);
+
+        // $session_data = $request->session()->forget();
+        $session_data = $request->session()->forget('login_id');
+
+    }
 }

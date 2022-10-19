@@ -607,5 +607,5 @@
         setTimeout(function() { $(".alert-success").fadeOut(1500); }, 1000)
     })
     $(function() {
-        setTimeout(function() { $(".alert-fail").fadeOut(1500); }, 1000)
+        setTimeout(function() { $(".alert-danger").fadeOut(1500); }, 1000)
     })
