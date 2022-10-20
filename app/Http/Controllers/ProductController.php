@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\AddProduct;
+use App\Models\ProductReview;
+use App\Models\LoginRegister;
 
 class ProductController extends Controller
 {
@@ -68,6 +70,32 @@ class ProductController extends Controller
         // dd($like_product);
         $data = compact('single_product','like_product');
         return view('product/productdetails')->with($data);
+    }
+    public function productfeedback(Request $request, AddProduct $addProduct,LoginRegister $loginRegister, $id)
+    {
+        $user_id = $request->session()->get('login_id');
+        if($user_id)
+        {
+            $user = LoginRegister::find($user_id);
+            if($user)
+            {
+               
+
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            echo 'login error';
+        }
+
+        // $rating_star = $request['ratingstr'];
+        // $rating_star = $request['feedback_comment'];
+
+        // print_r($rating_star);
     }
     /**
      * Show the form for creating a new resource.

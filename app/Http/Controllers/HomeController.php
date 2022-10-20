@@ -139,10 +139,6 @@ class HomeController extends Controller
 
     }
 
-
-
-
-
     public function test(Request $request)
     {
 
