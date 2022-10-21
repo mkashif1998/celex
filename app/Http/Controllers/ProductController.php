@@ -62,16 +62,18 @@ class ProductController extends Controller
         $data = compact('all_product','total_product');
         return view('product/index')->with($data);
     }
-    public function productdetails(Request $request, AddProduct $addProduct, $id)
+    public function productdetails(Request $request, AddProduct $addProduct,ProductReview $productReview, $id)
     {
 
         $single_product= AddProduct::find($id);
+        $feedback_view = ProductReview::all();
+
         $like_product = AddProduct::where([['product_tag','=','Sale']])->orwhere([['product_tag','=','Both']])->get();
         // dd($like_product);
-        $data = compact('single_product','like_product');
+        $data = compact('single_product','like_product','feedback_view');
         return view('product/productdetails')->with($data);
     }
-    public function productfeedback(Request $request, AddProduct $addProduct,LoginRegister $loginRegister, $id)
+    public function productfeedback(Request $request, AddProduct $addProduct,LoginRegister $loginRegister,ProductReview $productReview, $id)
     {
         $user_id = $request->session()->get('login_id');
         if($user_id)
@@ -79,8 +81,31 @@ class ProductController extends Controller
             $user = LoginRegister::find($user_id);
             if($user)
             {
-               
+                $u_name = $user->user_name;
+                $u_email = $user->user_email;
 
+                $request->validate([
+                    'ratingstr' =>'required',
+                    'feedback_comment' =>'required'
+                ]);
+
+                $save_feedback = new ProductReview;
+                $save_feedback->user_name = $u_name;
+                $save_feedback->user_email = $u_email;
+                $save_feedback->product_id = $id;
+                $save_feedback->product_rating = $request['ratingstr'];
+                $save_feedback->feedback_comment = $request['feedback_comment'];
+
+                $data = $save_feedback->save();
+
+                if($data)
+                {
+                    return back();
+                }
+                else
+                {
+
+                }
             }
             else
             {

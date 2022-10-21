@@ -3079,6 +3079,12 @@ body.offcanvas-open {
 	color: #fdd835;
 }
 
+.description-review-bottom .single-review .review-top-wrap .review-left .rating-product .graystr {
+	overflow: hidden;
+	font-size: 18px;
+	color: gray;
+}
+
 .description-review-bottom .single-review .review-top-wrap .review-left a {
 	color: #4c4c4c;
 }

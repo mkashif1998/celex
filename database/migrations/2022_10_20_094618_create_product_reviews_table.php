@@ -19,8 +19,7 @@ class CreateProductReviewsTable extends Migration
             $table->string('user_email');
             $table->string('product_id');
             $table->string('product_rating');
-            $table->string('rating_star');
-            $table->string('feedback');
+            $table->string('feedback_comment');
             $table->timestamps();
         });
     }

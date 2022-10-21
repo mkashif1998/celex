@@ -185,6 +185,18 @@
     stroke-dashoffset: -12;
   }
 }
+
+#profileImage {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #512DA8;
+  font-size: 35px;
+  color: #fff;
+  text-align: center;
+  line-height: 70px;
+  margin: 20px 0;
+}
 </style>
 @endsection
 @section('main-section')
@@ -378,36 +390,48 @@
                     <div class="row">
                         <div class="col-lg-7">
                             <div class="review-wrapper">
-                                <div class="single-review">
-                                    <div class="review-img">
-                                        <img src="{{url('/')}}/images/review-image/1.png" alt="" />
-                                    </div>
-                                    <div class="review-content">
-                                        <div class="review-top-wrap">
-                                            <div class="review-left">
-                                                <div class="review-name">
-                                                    <h4>White Lewis</h4>
+                                @foreach ($feedback_view as $product_rating)
+                                    <div class="single-review">
+                                        <div class="review-img">
+                                            {{-- <img src="{{url('/')}}/images/review-image/1.png" alt="" /> --}}
+                                            <span id="firstName" hidden>{{  $product_rating->user_name }}</span>
+                                            <div class="text-uppercase" id="profileImage"></div>
+                                        </div>
+                                        <div class="review-content">
+                                            <div class="review-top-wrap">
+                                                <div class="review-left">
+                                                    <div class="review-name">
+                                                        <h4 class="text-capitalize">{{  $product_rating->user_name }}</h4>
+                                                    </div>
+                                                    <div class="rating-product">
+                                                        <?php
+                                                            $ratingstr = $product_rating->product_rating;
+                                                            $goldstr = 5 - $ratingstr ;
+                                                            $graystr = 5 - $goldstr ;
+
+                                                        ?>
+                                                        @for ($i =0; $i<$graystr; $i++)
+                                                        <i class="ion-android-star"></i>
+                                                        @endfor
+                                                        @for ($i =0; $i<$goldstr; $i++)
+                                                        <i class="ion-android-star graystr"></i>
+                                                        @endfor
+                                                    </div>
                                                 </div>
-                                                <div class="rating-product">
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
-                                                    <i class="ion-android-star"></i>
+                                                <div class="review-left">
+                                                    <a href="#">{{  $product_rating->created_at }}</a>
                                                 </div>
                                             </div>
-                                            <div class="review-left">
-                                                <a href="#">Reply</a>
+                                            <div class="review-bottom">
+                                                <p>
+                                                    {{  $product_rating->feedback_comment }}
+                                                </p>
                                             </div>
                                         </div>
-                                        <div class="review-bottom">
-                                            <p>
-                                                Quisque varius sed purus ac euismod. Duis urna mauris, pharetra quis ultricies id, eleifend vitae ipsum. Mauris dui nisi, sagittis sit amet luctus ut, pellentesque quis risus
-                                            </p>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="single-review child-review">
+                                @endforeach
+
+                                {{-- <div class="single-review child-review">
                                     <div class="review-img">
                                         <img src="{{url('/')}}/images/review-image/2.png" alt="" />
                                     </div>
@@ -433,7 +457,7 @@
                                             <p>Quisque varius sed purus ac euismod. Duis urna mauris, pharetra quis ultricies id, eleifend vitae ipsum. Mauris dui nisi, sagittis.</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-lg-5">
@@ -737,6 +761,18 @@
     <div class="d-flex justify-content-center">
         <textarea type="text" name="feedback_comment" rows="5" style="width: 60%" placeholder="Please enter here..."></textarea>
     </div>
+    <div class="text-center mt-4">
+        <div class="text-danger">
+            @error('ratingstr')
+            {{ $message }}
+            @enderror
+        </div>
+        <div class="text-danger">
+            @error('feedback_comment')
+            {{ $message }}
+            @enderror
+        </div>
+    </div>
     <div class="d-flex justify-content-center mt-4">
         <button type="submit" class=" btn btn-primary btn-hover-primary ml-4 float-right"> Submit</button>
     </div>
@@ -804,5 +840,11 @@ class StarRating {
 		});
 	}
 }
+
+$(document).ready(function(){
+  var firstName = $('#firstName').text();
+  var intials = firstName.charAt(0);
+  var profileImage = $('#profileImage').text(intials);
+});
 </script>
 @endsection
