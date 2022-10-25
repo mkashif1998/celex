@@ -4,198 +4,29 @@
 @endpush
 @section('CSSStyle')
 <style>
-
-:root {
-  --bg: #e3e4e8;
-  --fg: #17181c;
-  --primary: #255ff4;
-  --yellow: #f4a825;
-  --yellow-t: rgba(244, 168, 37, 0);
-  --bezier: cubic-bezier(0.42,0,0.58,1);
-  --trans-dur: 0.3s;
-  font-size: calc(24px + (30 - 24) * (100vw - 320px) / (1280 - 320));
-}
-
-.ratingstr {
-  /* margin: auto; */
-}
-/* .ratingstr__display {
-  font-size: 1em;
-  font-weight: 500;
-  min-height: 1.25em;
-  position: absolute;
-  top: 100%;
-  width: 100%;
-  text-align: center;
-} */
-.ratingstr__stars {
-  display: flex;
-  padding-bottom: 0.375em;
+    .star {
   position: relative;
+  display: inline-block;
+  font-size: 30px;
 }
-.ratingstr__stars input{
-  /* border: 1px solid red; */
-  display: none;
+
+.star-under {
+  color: #ddd;
+  font-size: 40px;
 }
-.ratingstr__star {
-  display: block;
-  overflow: visible;
-  pointer-events: none;
-  width: 2em;
-  height: 2em;
-}
-.ratingstr__star-ring, .ratingstr__star-fill, .ratingstr__star-line, .ratingstr__star-stroke {
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
-}
-.ratingstr__star-ring, .ratingstr__star-fill, .ratingstr__star-line {
-  stroke: var(--yellow);
-}
-.ratingstr__star-fill {
-  fill: var(--yellow);
-  transform: scale(0);
-  transition: fill var(--trans-dur) var(--bezier), transform var(--trans-dur) var(--bezier);
-}
-.ratingstr__star-stroke {
-  stroke: #c7cad1;
-  transition: stroke var(--trans-dur);
-}
-.ratingstr__label {
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0.125em;
-}
-.ratingstr__label--delay1 .ratingstr__star-ring, .ratingstr__label--delay1 .ratingstr__star-fill, .ratingstr__label--delay1 .ratingstr__star-line, .ratingstr__label--delay1 .ratingstr__star-stroke {
-  animation-delay: 0.05s;
-}
-.ratingstr__label--delay2 .ratingstr__star-ring, .ratingstr__label--delay2 .ratingstr__star-fill, .ratingstr__label--delay2 .ratingstr__star-line, .ratingstr__label--delay2 .ratingstr__star-stroke {
-  animation-delay: 0.1s;
-}
-.ratingstr__label--delay3 .ratingstr__star-ring, .ratingstr__label--delay3 .ratingstr__star-fill, .ratingstr__label--delay3 .ratingstr__star-line, .ratingstr__label--delay3 .ratingstr__star-stroke {
-  animation-delay: 0.15s;
-}
-.ratingstr__label--delay4 .ratingstr__star-ring, .ratingstr__label--delay4 .ratingstr__star-fill, .ratingstr__label--delay4 .ratingstr__star-line, .ratingstr__label--delay4 .ratingstr__star-stroke {
-  animation-delay: 0.2s;
-}
-.ratingstr__input {
-  -webkit-appearance: none;
-  appearance: none;
-}
-.ratingstr__input:hover ~ [data-ratingstr]:not([hidden]) {
-  display: none;
-}
-.ratingstr__input-1:hover ~ [data-ratingstr="1"][hidden], .ratingstr__input-2:hover ~ [data-ratingstr="2"][hidden], .ratingstr__input-3:hover ~ [data-ratingstr="3"][hidden], .ratingstr__input-4:hover ~ [data-ratingstr="4"][hidden], .ratingstr__input-5:hover ~ [data-ratingstr="5"][hidden], .ratingstr__input:checked:hover ~ [data-ratingstr]:not([hidden]) {
-  display: block;
-}
-.ratingstr__input-1:hover ~ .ratingstr__label:first-of-type .ratingstr__star-stroke, .ratingstr__input-2:hover ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-stroke, .ratingstr__input-3:hover ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-stroke, .ratingstr__input-4:hover ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-stroke, .ratingstr__input-5:hover ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-stroke {
-  stroke: var(--yellow);
-  transform: scale(1);
-}
-.ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-ring, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-ring, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-ring, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-ring, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-ring {
-  animation-name: starRing;
-}
-.ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-stroke, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-stroke, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-stroke, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-stroke, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-stroke {
-  animation-name: starStroke;
-}
-.ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-line, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-line, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-line, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-line, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-line {
-  animation-name: starLine;
-}
-.ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-fill, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-fill, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-fill, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-fill, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-fill {
-  animation-name: starFill;
-}
-.ratingstr__input-1:not(:checked):hover ~ .ratingstr__label:first-of-type .ratingstr__star-fill, .ratingstr__input-2:not(:checked):hover ~ .ratingstr__label:nth-of-type(2) .ratingstr__star-fill, .ratingstr__input-3:not(:checked):hover ~ .ratingstr__label:nth-of-type(3) .ratingstr__star-fill, .ratingstr__input-4:not(:checked):hover ~ .ratingstr__label:nth-of-type(4) .ratingstr__star-fill, .ratingstr__input-5:not(:checked):hover ~ .ratingstr__label:nth-of-type(5) .ratingstr__star-fill {
-  fill: var(--yellow-t);
-}
-.ratingstr__sr {
-  clip: rect(1px, 1px, 1px, 1px);
+
+.star-over {
+  color: #f4a825;
   overflow: hidden;
   position: absolute;
-  width: 1px;
-  height: 1px;
+  font-size: 40px;
+  top: 0;
+  left: 0;
+  display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #17181c;
-    --fg: #e3e4e8;
-  }
-
-  .ratingstr {
-    margin: auto;
-  }
-  .ratingstr__star-stroke {
-    stroke: #454954;
-  }
-}
-@keyframes starRing {
-  from, 20% {
-    animation-timing-function: ease-in;
-    opacity: 1;
-    r: 8px;
-    stroke-width: 16px;
-    transform: scale(0);
-  }
-  35% {
-    animation-timing-function: ease-out;
-    opacity: 0.5;
-    r: 8px;
-    stroke-width: 16px;
-    transform: scale(1);
-  }
-  50%, to {
-    opacity: 0;
-    r: 16px;
-    stroke-width: 0;
-    transform: scale(1);
-  }
-}
-@keyframes starFill {
-  from, 40% {
-    animation-timing-function: ease-out;
-    transform: scale(0);
-  }
-  60% {
-    animation-timing-function: ease-in-out;
-    transform: scale(1.2);
-  }
-  80% {
-    transform: scale(0.9);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-@keyframes starStroke {
-  from {
-    transform: scale(1);
-  }
-  20%, to {
-    transform: scale(0);
-  }
-}
-@keyframes starLine {
-  from, 40% {
-    animation-timing-function: ease-out;
-    stroke-dasharray: 1 23;
-    stroke-dashoffset: 1;
-  }
-  60%, to {
-    stroke-dasharray: 12 12;
-    stroke-dashoffset: -12;
-  }
-}
-
-#profileImage {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #512DA8;
-  font-size: 35px;
-  color: #fff;
-  text-align: center;
-  line-height: 70px;
-  margin: 20px 0;
+.star-visible {
+  display: inline-block;
 }
 </style>
 @endsection
@@ -364,7 +195,7 @@
             <div class="description-review-topbar nav">
                 <a data-bs-toggle="tab" href="#des-details1">Description</a>
                 <a class="active" data-bs-toggle="tab" href="#des-details2">Product Details</a>
-                <a data-bs-toggle="tab" href="#des-details3">Reviews (2)</a>
+                <a data-bs-toggle="tab" href="#des-details3">Reviews ({{ $feedback_count }})</a>
             </div>
             <div class="tab-content description-review-bottom">
                 <div id="des-details2" class="tab-pane active">
@@ -388,14 +219,26 @@
                 </div>
                 <div id="des-details3" class="tab-pane">
                     <div class="row">
+                        <h1 id="over_all_rating">jejfj </h1>
                         <div class="col-lg-7">
                             <div class="review-wrapper">
                                 @foreach ($feedback_view as $product_rating)
                                     <div class="single-review">
+                                        <?php
+                                            $ratingstr = $product_rating->product_rating;
+                                            $goldstr = 5 - $ratingstr ;
+                                            $graystr = 5 - $goldstr ;
+
+                                            $acronym = "";
+                                            $first_words = $product_rating->user_name;
+                                            $acronym .= $first_words[0];
+                                        ?>
                                         <div class="review-img">
                                             {{-- <img src="{{url('/')}}/images/review-image/1.png" alt="" /> --}}
-                                            <span id="firstName" hidden>{{  $product_rating->user_name }}</span>
-                                            <div class="text-uppercase" id="profileImage"></div>
+                                            {{-- <span class="firstName" hidden>{{ $acronym }}</span> --}}
+                                            {{-- <span id="" >{{   Str::limit($product_rating->desc, 2) }}</span> --}}
+
+                                            <div class="text-uppercase profile_image_name" >{{ $acronym }}</div>
                                         </div>
                                         <div class="review-content">
                                             <div class="review-top-wrap">
@@ -404,12 +247,6 @@
                                                         <h4 class="text-capitalize">{{  $product_rating->user_name }}</h4>
                                                     </div>
                                                     <div class="rating-product">
-                                                        <?php
-                                                            $ratingstr = $product_rating->product_rating;
-                                                            $goldstr = 5 - $ratingstr ;
-                                                            $graystr = 5 - $goldstr ;
-
-                                                        ?>
                                                         @for ($i =0; $i<$graystr; $i++)
                                                         <i class="ion-android-star"></i>
                                                         @endfor
@@ -461,42 +298,77 @@
                             </div>
                         </div>
                         <div class="col-lg-5">
-                            <div class="ratting-form-wrapper pl-50">
-                                <h3>Add a Review</h3>
-                                <div class="ratting-form">
-                                    <form action="#">
-                                        <div class="star-box">
-                                            <span>Your rating:</span>
-                                            <div class="rating-product">
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                                <i class="ion-android-star"></i>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style">
-                                                    <input placeholder="Name" type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style">
-                                                    <input placeholder="Email" type="email" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="rating-form-style form-submit">
-                                                    <textarea name="Your Review" placeholder="Message"></textarea>
-                                                    <button class="btn btn-primary btn-hover-color-primary "
-                                                        type="submit" value="Submit">Submit</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+                            <div class="">
+                                <div class="chart">
+                                  <div class="rate-box">
+                                    <span class="value">5</span>
+                                    <div class="progress-bar">
+                                      <span class="progress"></span>
+                                    </div>
+                                    <span class="count">{{ $five_star }}</span>
+                                  </div>
+                                  <div class="rate-box">
+                                    <span class="value">4</span>
+                                    <div class="progress-bar"><span class="progress"></span></div>
+                                    <span class="count">{{ $foure_star }}</span>
+                                  </div>
+                                  <div class="rate-box">
+                                    <span class="value">3</span>
+                                    <div class="progress-bar"><span class="progress"></span></div>
+                                    <span class="count">{{ $three_star }}</span>
+                                  </div>
+                                  <div class="rate-box">
+                                    <span class="value">2</span>
+                                    <div class="progress-bar"><span class="progress"></span></div>
+                                    <span class="count">{{ $two_star }}</span>
+                                  </div>
+                                  <div class="rate-box">
+                                    <span class="value">1</span>
+                                    <div class="progress-bar"><span class="progress"></span></div>
+                                    <span class="count">{{ $one_star }}</span>
+                                  </div>
                                 </div>
-                            </div>
+                                <div class="global">
+                                    <?php
+                                            $fivestr = 5*$five_star;
+                                            $fourstr = 4*$foure_star;
+                                            $threestr = 3*$three_star;
+                                            $twostr = 2*$two_star;
+                                            $onestr = 1*$one_star;
+
+                                            $average_rating = ($fivestr+$fourstr+$threestr+$twostr+$onestr)/$feedback_count;
+
+
+                                    ?>
+                                  <span class="global-value">{{ number_format($average_rating,2) }}</span>
+                                  {{-- <div class="rating-icons">
+                                    <i class="ion-android-star"></i>
+                                    <i class="ion-android-star"></i>
+                                    <i class="ion-android-star"></i>
+                                    <i class="ion-android-star"></i>
+                                    <i class="ion-android-star"></i>
+                                    <span class="one"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                    <span class="two"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span>
+                                  </div> --}}
+                                    <div id="parent1" class="mt-2">
+                                        <i class="star star-under fa fa-star">
+                                            <i class="star star-over fa fa-star"></i>
+                                        </i>
+                                        <i class="star star-under fa fa-star">
+                                            <i class="star star-over fa fa-star"></i>
+                                        </i>
+                                        <i class="star star-under fa fa-star">
+                                            <i class="star star-over fa fa-star"></i>
+                                        </i>
+                                        <i class="star star-under fa fa-star">
+                                            <i class="star star-over fa fa-star"></i>
+                                        </i>
+                                        <i class="star star-under fa fa-star">
+                                            <i class="star star-over fa fa-star"></i>
+                                        </i>
+                                    </div>
+                                </div>
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -780,6 +652,7 @@
 @endsection
 @section('script')
 <script>
+/* --------------------------------------Ratind stat JS----------------------------------------- */
     window.addEventListener("DOMContentLoaded",() => {
 	const starRating = new StarRating("form");
 });
@@ -840,11 +713,30 @@ class StarRating {
 		});
 	}
 }
-
-$(document).ready(function(){
-  var firstName = $('#firstName').text();
-  var intials = firstName.charAt(0);
-  var profileImage = $('#profileImage').text(intials);
+/* --------------------------------------Ratind stat JS----------------------------------------- */
+$(document).ready(function() {
+  setTimeout(function() {
+    $("#over_all_rating").val();
+    var overrating = $("#over_all_rating").val();
+    alert(overrating)
+    var rating1 = 4.00;
+    rateStyle(rating1, 'parent1');
+    // javascript
+    function rateStyle(num, divID) {
+        var ratingRounded = Math.floor(num);
+        var starArray = document.getElementById(divID).querySelectorAll(".star-over");
+    for (var i = 0; i < ratingRounded; i++) {
+        starArray[i].classList.add("star-visible");
+    }
+    var finalStar = Math.round((num-ratingRounded)*100);
+    if (finalStar != 0) {
+    starArray[ratingRounded].classList.add("star-visible");
+    starArray[ratingRounded].style.width=finalStar+"%";
+    }
+    }
+  }, 5000);
 });
+
+
 </script>
 @endsection

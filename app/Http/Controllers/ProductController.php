@@ -67,10 +67,16 @@ class ProductController extends Controller
 
         $single_product= AddProduct::find($id);
         $feedback_view = ProductReview::all();
-
+        $feedback_count = ProductReview::count();
+        $five_star = ProductReview::where('product_rating','=','5')->count();
+        $foure_star = ProductReview::where('product_rating','=','4')->count();
+        $three_star = ProductReview::where('product_rating','=','3')->count();
+        $two_star = ProductReview::where('product_rating','=','2')->count();
+        $one_star = ProductReview::where('product_rating','=','1')->count();
+        // $c=ProductReview::where('value',$val)->get()->count();
         $like_product = AddProduct::where([['product_tag','=','Sale']])->orwhere([['product_tag','=','Both']])->get();
         // dd($like_product);
-        $data = compact('single_product','like_product','feedback_view');
+        $data = compact('single_product','like_product','feedback_view','feedback_count','five_star','foure_star','three_star','two_star','one_star');
         return view('product/productdetails')->with($data);
     }
     public function productfeedback(Request $request, AddProduct $addProduct,LoginRegister $loginRegister,ProductReview $productReview, $id)

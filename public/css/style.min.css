@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
-@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans&amp;
-
-family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;display=swap);*,::after,::before {
+@import url(https://fonts.googleapis.com/css2?family=Josefin+Sans&amp;family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;display=swap);*,::after,::before {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
@@ -8293,3 +8291,293 @@ body.offcanvas-open {
       height: 30px;
       margin-bottom: 20px;
   }
+
+
+
+  /* --------------------------------------Ratind stat style----------------------------------------- */
+:root {
+    --bg: #e3e4e8;
+    --fg: #17181c;
+    --primary: #255ff4;
+    --yellow: #f4a825;
+    --yellow-t: rgba(244, 168, 37, 0);
+    --bezier: cubic-bezier(0.42,0,0.58,1);
+    --trans-dur: 0.3s;
+    font-size: calc(24px + (30 - 24) * (100vw - 320px) / (1280 - 320));
+  }
+
+  .ratingstr__stars {
+    display: flex;
+    padding-bottom: 0.375em;
+    position: relative;
+  }
+  .ratingstr__stars input{
+    /* border: 1px solid red; */
+    display: none;
+  }
+  .ratingstr__star {
+    display: block;
+    overflow: visible;
+    pointer-events: none;
+    width: 2em;
+    height: 2em;
+  }
+  .ratingstr__star-ring, .ratingstr__star-fill, .ratingstr__star-line, .ratingstr__star-stroke {
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  .ratingstr__star-ring, .ratingstr__star-fill, .ratingstr__star-line {
+    stroke: var(--yellow);
+  }
+  .ratingstr__star-fill {
+    fill: var(--yellow);
+    transform: scale(0);
+    transition: fill var(--trans-dur) var(--bezier), transform var(--trans-dur) var(--bezier);
+  }
+  .ratingstr__star-stroke {
+    stroke: #c7cad1;
+    transition: stroke var(--trans-dur);
+  }
+  .ratingstr__label {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0.125em;
+  }
+  .ratingstr__label--delay1 .ratingstr__star-ring, .ratingstr__label--delay1 .ratingstr__star-fill, .ratingstr__label--delay1 .ratingstr__star-line, .ratingstr__label--delay1 .ratingstr__star-stroke {
+    animation-delay: 0.05s;
+  }
+  .ratingstr__label--delay2 .ratingstr__star-ring, .ratingstr__label--delay2 .ratingstr__star-fill, .ratingstr__label--delay2 .ratingstr__star-line, .ratingstr__label--delay2 .ratingstr__star-stroke {
+    animation-delay: 0.1s;
+  }
+  .ratingstr__label--delay3 .ratingstr__star-ring, .ratingstr__label--delay3 .ratingstr__star-fill, .ratingstr__label--delay3 .ratingstr__star-line, .ratingstr__label--delay3 .ratingstr__star-stroke {
+    animation-delay: 0.15s;
+  }
+  .ratingstr__label--delay4 .ratingstr__star-ring, .ratingstr__label--delay4 .ratingstr__star-fill, .ratingstr__label--delay4 .ratingstr__star-line, .ratingstr__label--delay4 .ratingstr__star-stroke {
+    animation-delay: 0.2s;
+  }
+  .ratingstr__input {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .ratingstr__input:hover ~ [data-ratingstr]:not([hidden]) {
+    display: none;
+  }
+  .ratingstr__input-1:hover ~ [data-ratingstr="1"][hidden], .ratingstr__input-2:hover ~ [data-ratingstr="2"][hidden], .ratingstr__input-3:hover ~ [data-ratingstr="3"][hidden], .ratingstr__input-4:hover ~ [data-ratingstr="4"][hidden], .ratingstr__input-5:hover ~ [data-ratingstr="5"][hidden], .ratingstr__input:checked:hover ~ [data-ratingstr]:not([hidden]) {
+    display: block;
+  }
+  .ratingstr__input-1:hover ~ .ratingstr__label:first-of-type .ratingstr__star-stroke, .ratingstr__input-2:hover ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-stroke, .ratingstr__input-3:hover ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-stroke, .ratingstr__input-4:hover ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-stroke, .ratingstr__input-5:hover ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-stroke {
+    stroke: var(--yellow);
+    transform: scale(1);
+  }
+  .ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-ring, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-ring, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-ring, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-ring, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-ring {
+    animation-name: starRing;
+  }
+  .ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-stroke, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-stroke, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-stroke, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-stroke, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-stroke {
+    animation-name: starStroke;
+  }
+  .ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-line, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-line, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-line, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-line, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-line {
+    animation-name: starLine;
+  }
+  .ratingstr__input-1:checked ~ .ratingstr__label:first-of-type .ratingstr__star-fill, .ratingstr__input-2:checked ~ .ratingstr__label:nth-of-type(-n + 2) .ratingstr__star-fill, .ratingstr__input-3:checked ~ .ratingstr__label:nth-of-type(-n + 3) .ratingstr__star-fill, .ratingstr__input-4:checked ~ .ratingstr__label:nth-of-type(-n + 4) .ratingstr__star-fill, .ratingstr__input-5:checked ~ .ratingstr__label:nth-of-type(-n + 5) .ratingstr__star-fill {
+    animation-name: starFill;
+  }
+  .ratingstr__input-1:not(:checked):hover ~ .ratingstr__label:first-of-type .ratingstr__star-fill, .ratingstr__input-2:not(:checked):hover ~ .ratingstr__label:nth-of-type(2) .ratingstr__star-fill, .ratingstr__input-3:not(:checked):hover ~ .ratingstr__label:nth-of-type(3) .ratingstr__star-fill, .ratingstr__input-4:not(:checked):hover ~ .ratingstr__label:nth-of-type(4) .ratingstr__star-fill, .ratingstr__input-5:not(:checked):hover ~ .ratingstr__label:nth-of-type(5) .ratingstr__star-fill {
+    fill: var(--yellow-t);
+  }
+  .ratingstr__sr {
+    clip: rect(1px, 1px, 1px, 1px);
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17181c;
+      --fg: #e3e4e8;
+    }
+
+    .ratingstr {
+      margin: auto;
+    }
+    .ratingstr__star-stroke {
+      stroke: #454954;
+    }
+  }
+  @keyframes starRing {
+    from, 20% {
+      animation-timing-function: ease-in;
+      opacity: 1;
+      r: 8px;
+      stroke-width: 16px;
+      transform: scale(0);
+    }
+    35% {
+      animation-timing-function: ease-out;
+      opacity: 0.5;
+      r: 8px;
+      stroke-width: 16px;
+      transform: scale(1);
+    }
+    50%, to {
+      opacity: 0;
+      r: 16px;
+      stroke-width: 0;
+      transform: scale(1);
+    }
+  }
+  @keyframes starFill {
+    from, 40% {
+      animation-timing-function: ease-out;
+      transform: scale(0);
+    }
+    60% {
+      animation-timing-function: ease-in-out;
+      transform: scale(1.2);
+    }
+    80% {
+      transform: scale(0.9);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes starStroke {
+    from {
+      transform: scale(1);
+    }
+    20%, to {
+      transform: scale(0);
+    }
+  }
+  @keyframes starLine {
+    from, 40% {
+      animation-timing-function: ease-out;
+      stroke-dasharray: 1 23;
+      stroke-dashoffset: 1;
+    }
+    60%, to {
+      stroke-dasharray: 12 12;
+      stroke-dashoffset: -12;
+    }
+  }
+  .profile_image_name {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #512DA8;
+    font-size: 35px;
+    color: #fff;
+    text-align: center;
+    line-height: 70px;
+    margin: 20px 0;
+  }
+
+/*----- display overall ------*/
+
+  .chart {
+    /* width: 500px; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .chart .rate-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    height: 30px;
+    padding: 20px 0;
+    padding: 10px;
+  }
+  .chart .rate-box > * {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: #444;
+  }
+  .rate-box .value {
+    display: flex;
+    align-items: center;
+  }
+  .rate-box .value:hover {
+    color: #66bb6a;
+  }
+  .chart .value {
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .rate-box .progress-bar {
+    border-width: 1px;
+    position: relative;
+    background-color: #cfd8dc91;
+
+    height: 10px;
+    border-radius: 100px;
+    width: 350px;
+  }
+  .rate-box .progress-bar .progress {
+    background-color: #66bb6a;
+    height: 100%;
+    border-radius: 100px;
+    transition: 300ms ease-in-out;
+  }
+
+  .global {
+    /* height: 100%; */
+    /* width: 150px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 30px;
+  }
+  .one .fas {
+    color: #cfd8dc;
+  }
+
+  .two {
+    background: linear-gradient(to right, #66bb6a 0%, transparent 0%);
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+    transition: 0.5s ease-in-out all;
+  }
+
+  .global > span {
+    font-size: 90px;
+    font-weight: 500;
+  }
+
+  .rating-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 10%;
+    margin-top: 30px;
+  }
+  .rating-icons span {
+    position: absolute;
+    display: flex;
+    font-size: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 5px;
+  }
+
+  .total-reviews {
+    font-size: 25px !important;
+  }
+  .rating-icons i
+  {
+    color: #fdd835;
+    font-size: 40px;
+  }
+ /* --------------------------------------Ratind stat style----------------------------------------- */
