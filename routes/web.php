@@ -49,6 +49,8 @@ Route::group(['prefix'=>'/customer'], function(){
     Route::get('cart',[CartController::class,'index']);
     Route::post('cart/{id}',[CartController::class,'create']);
     Route::get('cart-item-delete/{id}',[CartController::class,'destroy']);
+    Route::post('cart-quantity',[CartController::class,'cartquantity']);
+    Route::post('cart-confirm/{id}',[CartController::class,'cartconfirm']);
 
 
     Route::get('product',[ProductController::class,'index']);

@@ -4,11 +4,13 @@
 @endpush
 @section('main-section')
 <div class="container">
-    <div class="mb-3 mt-5  p-2 d-flex justify-content-between" style="border: 1px solid lightgray;border-radius:10px" style="border: 1px solid lightgray;border-raddius:10px">
-        <h4 class="text-secondary pt-1">Add New Home Slider Image and Details</h4>
-        <svg id="updownbtn" class="text-secondary cursor pt-1 pr-4 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="25" height="25" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
+    <div class="mb-3 mt-5  p-1 d-flex justify-content-between" style="border: 1px solid lightgray;border-radius:10px" style="border: 1px solid lightgray;border-raddius:10px">
+        <h6 class="text-secondary pt-1">Add New Home Slider Image and Details</h6>
+        <div class="mr-5 mt-1">
+            <svg id="updownbtn" class="text-secondary cursor pt-1 pr-4 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="35" height="35" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+        </div>
     </div>
     <form action="slider-data-save" method="POST" enctype="multipart/form-data">
         @csrf
@@ -18,7 +20,7 @@
         @if(Session::has('sliderfail'))
         <div class="alert alert-fail">{{ Session::get('sliderfail') }}</div>
         @endif
-        <div class="row p-3 up_down_function">
+        <div class="row p-1 up_down_function">
             <div class="col-md-6 align-self-stretch">
                 <div class="row">
                     <div class="default-form-box mb-20">
@@ -59,14 +61,14 @@
     </form>
     <div class="row mt-4">
         @foreach ($slider_view as $slider_data)
-        <div class="col-md-4">
+        <div class="col-md-4 d-flex align-items-stretch">
             <div class="card" style="width: 100%">
                 <img src="{{ url('/') }}/images/slider/{{ $slider_data->slider_image }}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">{{ $slider_data->slider_title }}</h5>
+                  <h6 class="card-title">{{ $slider_data->slider_title }}</h6>
                   <p class="card-text">{{ $slider_data->slider_text }}</p>
                 </div>
-                <div class=" p-3 card-border">
+                <div class=" p-2 card-border">
                     <div class="d-flex justify-content-between">
                         <a href="#" class="text-light font-weight-bold">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="20" height="20" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

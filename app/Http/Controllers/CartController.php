@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\AddProduct;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CartController extends Controller
 {
@@ -18,8 +19,14 @@ class CartController extends Controller
         $login_id = $request->session()->get('login_id');
         if($login_id)
         {
-            $cart_view = Cart::with('addproduct')->where('user_id', $login_id)->get();
-            $data = compact('cart_view');
+            $cart_item_count = Cart::with('addproduct')->where([['user_id','=', $login_id,],['cart_status','=','Pending']])->count();
+            if($cart_item_count==0)
+            {
+                Alert::error('Sorry', 'The cart is empety');
+                return redirect('/');
+            }
+            $cart_view = Cart::with('addproduct')->where([['user_id','=', $login_id,],['cart_status','=','Pending']])->get();
+            $data = compact('cart_view','login_id','cart_item_count');
             return view('cart.index')->with($data);
         }
         else
@@ -81,7 +88,24 @@ class CartController extends Controller
             return redirect('customer/sign-in');
         }
     }
+    public function cartquantity(Request $request,Cart $cart)
+    {
 
+        $prod_id = $request->post('prod_id');
+        $inc_btn = $request->post('inc_btn');
+    }
+    public function cartconfirm(Request $request,Cart $cart, $id)
+    {
+        $cart_confirm = Cart::where("user_id","=",$id)->get();
+        foreach ($cart_confirm as $user)
+            {
+                // var_dump($user->cart_status);
+                $user->cart_status = "Confirm";
+                $user->save();
+
+            }
+            return redirect('customer/checkout');
+    }
     /**
      * Store a newly created resource in storage.
      *

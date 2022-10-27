@@ -219,7 +219,6 @@
                 </div>
                 <div id="des-details3" class="tab-pane">
                     <div class="row">
-                        <h1 id="over_all_rating">jejfj </h1>
                         <div class="col-lg-7">
                             <div class="review-wrapper">
                                 @foreach ($feedback_view as $product_rating)
@@ -340,7 +339,7 @@
 
 
                                     ?>
-                                  <span class="global-value">{{ number_format($average_rating,2) }}</span>
+                                  <span class="global-value" id="over_all_rating">{{ number_format($average_rating,2) }}</span>
                                   {{-- <div class="rating-icons">
                                     <i class="ion-android-star"></i>
                                     <i class="ion-android-star"></i>
@@ -714,12 +713,12 @@ class StarRating {
 	}
 }
 /* --------------------------------------Ratind stat JS----------------------------------------- */
-$(document).ready(function() {
-  setTimeout(function() {
-    $("#over_all_rating").val();
-    var overrating = $("#over_all_rating").val();
-    alert(overrating)
-    var rating1 = 4.00;
+// $(document).ready(function() {
+//   setTimeout(function() {
+    // $("#over_all_rating").val();
+    var overrating = $("#over_all_rating").text();
+    // alert(overrating)
+    var rating1 = overrating;
     rateStyle(rating1, 'parent1');
     // javascript
     function rateStyle(num, divID) {
@@ -734,8 +733,8 @@ $(document).ready(function() {
     starArray[ratingRounded].style.width=finalStar+"%";
     }
     }
-  }, 5000);
-});
+//   }, 5000);
+// });
 
 
 </script>

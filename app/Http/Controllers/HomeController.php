@@ -31,16 +31,16 @@ class HomeController extends Controller
             }
             else
             {
-
                 Alert::error('Opps', 'The Product is Not Found');
-                $featureitem = AddProduct::where('product_type','=','Features Products')->get();
 
+                $slider_data = Slider::all();
+                $featureitem = AddProduct::where('product_type','=','Features Products')->get();
                 $newarrivalitem = AddProduct::where('product_type','=','New Arrivals')->get();
                 $bestselleritem = AddProduct::where('product_type','=','Best Sellers')->get();
                 $onsaleitem = AddProduct::where('product_type','=','On Sales')->get();
                 $saleitem = AddProduct::where('product_type','=','Sale Items')->get();
 
-                $data= Compact('featureitem','newarrivalitem','onsaleitem','saleitem','bestselleritem');
+                $data= Compact('featureitem','newarrivalitem','onsaleitem','saleitem','bestselleritem','slider_data');
                 return view('home/index')->with($data);
                 }
         }

@@ -329,13 +329,13 @@
 <script>
     $(document).ready(function(){
         var a = document.getElementById('mylist').getElementsByTagName('li');
-        var productcategory = "";
-        for(var i = 0; i < a.length; i++){
-            a[i].onclick = function(){
-                    // alert(this.innerText);
-                    productcategory = this.innerText;
-            }
-        }
+        // var productcategory = "";
+        // for(var i = 0; i < a.length; i++){
+        //     a[i].onclick = function(){
+        //             // alert(this.innerText);
+        //             productcategory = this.innerText;
+        //     }
+        // }
         $('#sortingdata').on('change', function() {
             let sorting = $(this).val();
             // alert(productcategory);
@@ -347,9 +347,10 @@
                 type: 'post',
                 dataType: 'json',
                 cache: false,
-                data: 'sorting='+sorting+ ' category='+productcategory+ ' &_token= {{ csrf_token() }}',
+                data: 'sorting='+sorting+ '  &_token= {{ csrf_token() }}',
                 success:function(response)
-                {   $(".product_bydefault").hide();
+                {
+                    $(".product_bydefault").hide();
                     // alert(JSON.stringify(response));
                     var resultData = response.search_product;
                     var bodyData = "";
