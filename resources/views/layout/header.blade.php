@@ -192,9 +192,7 @@
         <!-- Header Bottom  End -->
     </div>
     <!-- Header Area End  -->
-
-
-
+    
     <!-- Header Top Search Start -->
     <div class="d-block d-lg-none mb-5">
         <div class="container">

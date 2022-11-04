@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AddProduct;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use App\Models\ProductReview;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
@@ -14,7 +15,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, AddProduct $addProduct)
+    public function index(Request $request, AddProduct $addProduct,ProductReview $productReview)
     {
         $search = $request['search'] ?? "";
 
@@ -23,10 +24,15 @@ class HomeController extends Controller
             $single_product = AddProduct::where('product_name','LIKE',"%$search%")->first();
             if($single_product)
             {
-                $data = compact('single_product');
+                $feedback_view = ProductReview::all();
+                $feedback_count = ProductReview::count();
+                $five_star = ProductReview::where('product_rating','=','5')->count();
+                $foure_star = ProductReview::where('product_rating','=','4')->count();
+                $three_star = ProductReview::where('product_rating','=','3')->count();
+                $two_star = ProductReview::where('product_rating','=','2')->count();
+                $one_star = ProductReview::where('product_rating','=','1')->count();
                 $like_product = AddProduct::where([['product_tag','=','Sale']])->orwhere([['product_tag','=','Both']])->get();
-
-                $data = compact('single_product','like_product');
+                $data = compact('single_product','like_product','feedback_view','feedback_count','five_star','foure_star','three_star','two_star','one_star');
                 return view('product/productdetails')->with($data);
             }
             else
